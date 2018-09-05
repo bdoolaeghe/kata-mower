@@ -5,6 +5,7 @@ import my.kata.mower.coordinates.Coordinates;
 import my.kata.mower.orientation.Orientation;
 
 import java.io.IOException;
+import java.io.PrintStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -17,14 +18,15 @@ import static my.kata.mower.coordinates.Y.y;
 public class ScenarioRunner {
 
     public static void main(String[] args) throws IOException {
-        run("scenario.txt");
+        run("scenario.txt", System.out);
     }
 
-    //FIXME not clean code part.... should refacto !
-    public static void run(String scenarioFile) throws IOException {
+    public static void run(String scenarioFile, PrintStream out) throws IOException {
         ScenarioRunner scenario = new ScenarioRunner();
         String scenarioStr = new String(Files.readAllBytes(Paths.get(scenarioFile)));
         String[] lines = scenarioStr.split("\n");
+
+        //  parse scenario
         Lawn lawn = parseLawnDescription(lines[0]);
 
         for (int i = 1; i < lines.length; i = i + 2) {
@@ -33,7 +35,7 @@ public class ScenarioRunner {
                 Mower mower = parseMowerInitialPosition(initialPosition, lawn);
                 String instructionSequence = lines[i + 1];
                 mower.applyAll(instructionSequence);
-                System.out.println(mower.toString());
+                out.println(mower.toString());
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new RuntimeException("Malformed input file", e);
             }

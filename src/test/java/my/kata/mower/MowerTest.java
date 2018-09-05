@@ -1,0 +1,137 @@
+package my.kata.mower;
+
+import my.kata.mower.instructions.Instruction;
+import org.junit.Test;
+
+import static my.kata.mower.coordinates.Coordinates.coordinates;
+import static my.kata.mower.coordinates.X.x;
+import static my.kata.mower.coordinates.Y.y;
+import static my.kata.mower.orientation.Orientation.*;
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
+
+public class MowerTest {
+
+    Lawn lawn = new Lawn(coordinates(x(2), y(3)));
+
+    @Test
+    public void shloud_compute_new_position_when_going_north() {
+        Mower mower = new Mower(lawn, coordinates(x(0), y(0)), NORTH);
+        mower.apply(Instruction.FORWARD);
+        assertThat(mower.getPosition(), is(coordinates(x(0), y(1))));
+        assertThat(mower.getOrientation(), is(NORTH));
+    }
+
+    @Test
+    public void shloud_stay_when_trying_to_go_north_out_of_lawn() {
+        Mower mower = new Mower(lawn, coordinates(x(0), y(3)), NORTH);
+        mower.apply(Instruction.FORWARD);
+        assertThat(mower.getPosition(), is(coordinates(x(0), y(3))));
+        assertThat(mower.getOrientation(), is(NORTH));
+    }
+
+    @Test
+    public void shloud_compute_new_position_when_going_south() {
+        Mower mower = new Mower(lawn, coordinates(x(0), y(1)), SOUTH);
+        mower.apply(Instruction.FORWARD);
+        assertThat(mower.getPosition(), is(coordinates(x(0), y(0))));
+        assertThat(mower.getOrientation(), is(SOUTH));
+    }
+
+    @Test
+    public void shloud_stay_when_trying_to_go_south_out_of_lawn() {
+        Mower mower = new Mower(lawn, coordinates(x(0), y(0)), SOUTH);
+        mower.apply(Instruction.FORWARD);
+        assertThat(mower.getPosition(), is(coordinates(x(0), y(0))));
+        assertThat(mower.getOrientation(), is(SOUTH));
+    }
+
+    @Test
+    public void shloud_compute_new_position_when_going_west() {
+        Mower mower = new Mower(lawn, coordinates(x(1), y(0)), WEST);
+        mower.apply(Instruction.FORWARD);
+        assertThat(mower.getPosition(), is(coordinates(x(0), y(0))));
+        assertThat(mower.getOrientation(), is(WEST));
+    }
+
+
+    @Test
+    public void shloud_stay_when_trying_to_go_west_out_of_lawn() {
+        Mower mower = new Mower(lawn, coordinates(x(0), y(0)), WEST);
+        mower.apply(Instruction.FORWARD);
+        assertThat(mower.getPosition(), is(coordinates(x(0), y(0))));
+        assertThat(mower.getOrientation(), is(WEST));
+    }
+
+    @Test
+    public void shloud_compute_new_position_when_going_east() {
+        Mower mower = new Mower(lawn, coordinates(x(0), y(0)), EAST);
+        mower.apply(Instruction.FORWARD);
+        assertThat(mower.getPosition(), is(coordinates(x(1), y(0))));
+        assertThat(mower.getOrientation(), is(EAST));
+    }
+
+    @Test
+    public void shloud_stay_when_trying_to_go_east_out_of_lawn() {
+        Mower mower = new Mower(lawn, coordinates(x(2), y(0)), EAST);
+        mower.apply(Instruction.FORWARD);
+        assertThat(mower.getPosition(), is(coordinates(x(2), y(0))));
+        assertThat(mower.getOrientation(), is(EAST));
+    }
+
+    @Test
+    public void should_be_oriented_north_when_turn_right_from_west() {
+        Mower mower = new Mower(lawn, coordinates(x(2), y(0)), WEST);
+        mower.apply(Instruction.RIGHT);
+        assertThat(mower.getOrientation(), is(NORTH));
+    }
+
+    @Test
+    public void should_be_oriented_east_when_turn_right_from_north() {
+        Mower mower = new Mower(lawn, coordinates(x(2), y(0)), NORTH);
+        mower.apply(Instruction.RIGHT);
+        assertThat(mower.getOrientation(), is(EAST));
+    }
+
+    @Test
+    public void should_be_oriented_south_when_turn_right_from_east() {
+        Mower mower = new Mower(lawn, coordinates(x(2), y(0)), EAST);
+        mower.apply(Instruction.RIGHT);
+        assertThat(mower.getOrientation(), is(SOUTH));
+    }
+
+    @Test
+    public void should_be_oriented_west_when_turn_right_from_south() {
+        Mower mower = new Mower(lawn, coordinates(x(2), y(0)), SOUTH);
+        mower.apply(Instruction.RIGHT);
+        assertThat(mower.getOrientation(), is(WEST));
+    }
+
+    @Test
+    public void should_be_oriented_south_when_turn_left_from_west() {
+        Mower mower = new Mower(lawn, coordinates(x(2), y(0)), WEST);
+        mower.apply(Instruction.LEFT);
+        assertThat(mower.getOrientation(), is(SOUTH));
+    }
+    @Test
+    public void should_be_oriented_west_when_turn_left_from_north() {
+        Mower mower = new Mower(lawn, coordinates(x(2), y(0)), NORTH);
+        mower.apply(Instruction.LEFT);
+        assertThat(mower.getOrientation(), is(WEST));
+    }
+
+    @Test
+    public void should_be_oriented_north_when_turn_left_from_east() {
+        Mower mower = new Mower(lawn, coordinates(x(2), y(0)), EAST);
+        mower.apply(Instruction.LEFT);
+        assertThat(mower.getOrientation(), is(NORTH));
+
+    }
+
+    @Test
+    public void should_be_oriented_east_when_turn_left_from_south() {
+        Mower mower = new Mower(lawn, coordinates(x(2), y(0)), SOUTH);
+        mower.apply(Instruction.LEFT);
+        assertThat(mower.getOrientation(), is(EAST));
+    }
+}

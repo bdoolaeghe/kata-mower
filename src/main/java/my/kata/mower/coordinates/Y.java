@@ -4,7 +4,7 @@ package my.kata.mower.coordinates;
 import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode
-public class Y extends  XY {
+public class Y extends Coordinate {
     public Y(int value) {
         super(value);
     }

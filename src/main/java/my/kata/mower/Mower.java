@@ -7,6 +7,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NonNull;
 
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.toList;
+
 @Getter
 @AllArgsConstructor
 public class Mower {
@@ -21,12 +27,8 @@ public class Mower {
         position = instruction.applyOn(position, orientation, lawn);
     }
 
-    public void applyAll(String InstructionSequence, Lawn lawn) {
-        String[] instructions = InstructionSequence.replaceAll(" ", "").split("");
-        for (String instructionStr : instructions) {
-            Instruction instruction = Instruction.parse(instructionStr);
-            apply(instruction, lawn);
-        }
+    public void applyAll(List<Instruction> instructions , Lawn lawn) {
+        instructions.forEach(instruction -> apply(instruction, lawn));
     }
 
     @Override

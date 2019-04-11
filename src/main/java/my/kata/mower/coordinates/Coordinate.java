@@ -3,11 +3,11 @@ package my.kata.mower.coordinates;
 import lombok.Getter;
 
 @Getter
-public abstract class XY {
+public abstract class Coordinate {
 
     private int value;
 
-    public XY(int value) {
+    public Coordinate(int value) {
         this.value = value;
     }
 

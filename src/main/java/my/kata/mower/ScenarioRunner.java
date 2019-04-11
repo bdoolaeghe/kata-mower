@@ -22,19 +22,19 @@ public class ScenarioRunner {
     }
 
     public static void run(String scenarioFile, PrintStream out) throws IOException {
-        ScenarioRunner scenario = new ScenarioRunner();
         String scenarioStr = new String(Files.readAllBytes(Paths.get(scenarioFile)));
         String[] lines = scenarioStr.split("\n");
 
         //  parse scenario
         Lawn lawn = parseLawnDescription(lines[0]);
 
+        // for each couple of lines describing mower initial position / mower instruction sequence
         for (int i = 1; i < lines.length; i = i + 2) {
             try {
                 String initialPosition = lines[i];
-                Mower mower = parseMowerInitialPosition(initialPosition, lawn);
+                Mower mower = parseMowerInitialPosition(initialPosition);
                 String instructionSequence = lines[i + 1];
-                mower.applyAll(instructionSequence);
+                mower.applyAll(instructionSequence, lawn);
                 out.println(mower.toString());
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new RuntimeException("Malformed input file", e);
@@ -42,16 +42,16 @@ public class ScenarioRunner {
         }
     }
 
-    private static Mower parseMowerInitialPosition(String line, Lawn lawn) {
+    private static Mower parseMowerInitialPosition(String initialPositionLine) {
         // create mower
-        String[] initialPositionStr = line.split(" ");
+        String[] initialPositionStr = initialPositionLine.split(" ");
         Coordinates mowerInitialPosition = coordinates(x(initialPositionStr[0]), y(initialPositionStr[1]));
         Orientation mowerInitialOrientation = Orientation.parse(initialPositionStr[2]);
-        return new Mower(lawn, mowerInitialPosition, mowerInitialOrientation);
+        return new Mower(mowerInitialPosition, mowerInitialOrientation);
     }
 
-    private static Lawn parseLawnDescription(String line) {
-        String[] lawnCornerStr = line.split(" ");
+    private static Lawn parseLawnDescription(String lawnDescriptionLine) {
+        String[] lawnCornerStr = lawnDescriptionLine.split(" ");
         return new Lawn(coordinates(
                 x(lawnCornerStr[0]),
                 y(lawnCornerStr[1])));

@@ -12,22 +12,20 @@ import lombok.NonNull;
 public class Mower {
 
     @NonNull
-    private Lawn lawn;
-    @NonNull
     private Coordinates position;
     @NonNull
     private Orientation orientation;
 
-    public void apply(Instruction instruction) {
+    public void apply(Instruction instruction, Lawn lawn) {
         orientation = instruction.applyOn(orientation);
         position = instruction.applyOn(position, orientation, lawn);
     }
 
-    public void applyAll(String InstructionSequence) {
+    public void applyAll(String InstructionSequence, Lawn lawn) {
         String[] instructions = InstructionSequence.replaceAll(" ", "").split("");
         for (String instructionStr : instructions) {
             Instruction instruction = Instruction.parse(instructionStr);
-            apply(instruction);
+            apply(instruction, lawn);
         }
     }
 

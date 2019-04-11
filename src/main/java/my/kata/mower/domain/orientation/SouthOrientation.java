@@ -1,21 +1,21 @@
-package my.kata.mower.orientation;
+package my.kata.mower.domain.orientation;
 
-public class WestOrientation implements Orientation {
+public class SouthOrientation implements Orientation {
 
     @Override
     public Orientation turnLeft() {
-        return SOUTH;
+        return EAST;
     }
 
     @Override
     public Orientation turnRight() {
-        return NORTH;
+        return WEST;
     }
 
 
     @Override
     public String toString() {
-        return "W";
+        return "S";
     }
 
 }

@@ -1,6 +1,6 @@
-package my.kata.mower.instructions;
+package my.kata.mower.domain.instruction;
 
-import my.kata.mower.orientation.Orientation;
+import my.kata.mower.domain.orientation.Orientation;
 
 public class RightInstruction implements Instruction {
 

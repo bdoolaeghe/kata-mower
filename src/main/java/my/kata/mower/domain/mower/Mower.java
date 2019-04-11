@@ -1,17 +1,14 @@
-package my.kata.mower;
+package my.kata.mower.domain.mower;
 
-import my.kata.mower.coordinates.Coordinates;
-import my.kata.mower.instructions.Instruction;
-import my.kata.mower.orientation.Orientation;
+import my.kata.mower.domain.coordinates.Coordinates;
+import my.kata.mower.domain.instruction.Instruction;
+import my.kata.mower.domain.lawn.Lawn;
+import my.kata.mower.domain.orientation.Orientation;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NonNull;
 
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import static java.util.stream.Collectors.toList;
 
 @Getter
 @AllArgsConstructor

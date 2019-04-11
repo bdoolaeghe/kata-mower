@@ -1,4 +1,4 @@
-package my.kata.mower.coordinates;
+package my.kata.mower.domain.coordinates;
 
 
 import lombok.AllArgsConstructor;
@@ -6,8 +6,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
 
-import static my.kata.mower.coordinates.X.x;
-import static my.kata.mower.coordinates.Y.y;
+import static my.kata.mower.domain.coordinates.X.x;
+import static my.kata.mower.domain.coordinates.Y.y;
 
 @AllArgsConstructor
 @Getter

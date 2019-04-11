@@ -1,12 +1,14 @@
 package my.kata.mower;
 
-import my.kata.mower.instructions.Instruction;
+import my.kata.mower.domain.lawn.Lawn;
+import my.kata.mower.domain.mower.Mower;
+import my.kata.mower.domain.instruction.Instruction;
 import org.junit.Test;
 
-import static my.kata.mower.coordinates.Coordinates.coordinates;
-import static my.kata.mower.coordinates.X.x;
-import static my.kata.mower.coordinates.Y.y;
-import static my.kata.mower.orientation.Orientation.*;
+import static my.kata.mower.domain.coordinates.Coordinates.coordinates;
+import static my.kata.mower.domain.coordinates.X.x;
+import static my.kata.mower.domain.coordinates.Y.y;
+import static my.kata.mower.domain.orientation.Orientation.*;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 

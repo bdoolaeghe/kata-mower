@@ -1,21 +1,17 @@
 package my.kata.mower;
 
 import lombok.Data;
-import my.kata.mower.coordinates.Coordinates;
-import my.kata.mower.instructions.Instruction;
-import my.kata.mower.orientation.Orientation;
+import my.kata.mower.domain.lawn.Lawn;
+import my.kata.mower.domain.mower.Mower;
+import my.kata.mower.domain.instruction.Instruction;
+import my.kata.mower.infra.ScenarioParser;
 
 import java.io.IOException;
 import java.io.PrintStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.List;
-import java.util.stream.Stream;
 
-import static java.util.stream.Collectors.toList;
-import static my.kata.mower.coordinates.Coordinates.coordinates;
-import static my.kata.mower.coordinates.X.x;
-import static my.kata.mower.coordinates.Y.y;
+import static my.kata.mower.domain.coordinates.X.x;
+import static my.kata.mower.domain.coordinates.Y.y;
 
 
 @Data
@@ -26,19 +22,18 @@ public class ScenarioRunner {
     }
 
     public static void run(String scenarioFile, PrintStream out) throws IOException {
-        String scenarioStr = new String(Files.readAllBytes(Paths.get(scenarioFile)));
-        String[] lines = scenarioStr.split("\n");
-
         //  parse scenario
-        Lawn lawn = parseLawnDescription(lines[0]);
+        String[] scenarioLines = ScenarioParser.parseScenario(scenarioFile);
 
-        // for each couple of lines describing mower initial position / mower instruction sequence
-        for (int i = 1; i < lines.length; i = i + 2) {
+        Lawn lawn = ScenarioParser.parseLawnDescription(scenarioLines[0]);
+
+        // for each couple of scenarioLines describing mower initial position / mower instruction sequence
+        for (int i = 1; i < scenarioLines.length; i = i + 2) {
             try {
-                String initialPosition = lines[i];
-                Mower mower = parseMowerInitialPosition(initialPosition);
-                String instructionSequence = lines[i + 1];
-                List<Instruction> instructions = parseInstructions(instructionSequence);
+                String initialPosition = scenarioLines[i];
+                Mower mower = ScenarioParser.parseMowerInitialPosition(initialPosition);
+                String instructionSequence = scenarioLines[i + 1];
+                List<Instruction> instructions = ScenarioParser.parseInstructions(instructionSequence);
 
                 mower.applyAll(instructions, lawn);
                 out.println(mower.toString());
@@ -46,26 +41,6 @@ public class ScenarioRunner {
                 throw new RuntimeException("Malformed input file", e);
             }
         }
-    }
-
-    private static List<Instruction> parseInstructions(String instructionSequence) {
-        return Stream.of(instructionSequence.replaceAll(" ", "").split(""))
-                .map(Instruction::parse).collect(toList());
-    }
-
-    private static Mower parseMowerInitialPosition(String initialPositionLine) {
-        // create mower
-        String[] initialPositionStr = initialPositionLine.split(" ");
-        Coordinates mowerInitialPosition = coordinates(x(initialPositionStr[0]), y(initialPositionStr[1]));
-        Orientation mowerInitialOrientation = Orientation.parse(initialPositionStr[2]);
-        return new Mower(mowerInitialPosition, mowerInitialOrientation);
-    }
-
-    private static Lawn parseLawnDescription(String lawnDescriptionLine) {
-        String[] lawnCornerStr = lawnDescriptionLine.split(" ");
-        return new Lawn(coordinates(
-                x(lawnCornerStr[0]),
-                y(lawnCornerStr[1])));
     }
 
 }

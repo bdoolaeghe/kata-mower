@@ -1,4 +1,4 @@
-package my.kata.mower.orientation;
+package my.kata.mower.domain.orientation;
 
 public class EastOrientation implements Orientation {
 

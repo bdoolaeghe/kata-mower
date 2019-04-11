@@ -1,4 +1,4 @@
-package my.kata.mower.coordinates;
+package my.kata.mower.domain.coordinates;
 
 
 import lombok.EqualsAndHashCode;

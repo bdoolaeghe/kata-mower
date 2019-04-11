@@ -1,6 +1,6 @@
-package my.kata.mower;
+package my.kata.mower.domain.lawn;
 
-import my.kata.mower.coordinates.Coordinates;
+import my.kata.mower.domain.coordinates.Coordinates;
 import lombok.Getter;
 
 @Getter

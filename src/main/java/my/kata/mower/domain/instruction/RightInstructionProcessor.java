@@ -1,11 +1,11 @@
 package my.kata.mower.domain.instruction;
 
-import my.kata.mower.domain.orientation.Orientation;
+import my.kata.mower.domain.geography.orientation.Orientation;
 
-public class RightInstructionProcessor implements InstructionProcessor {
+public class RightInstructionProcessor implements Applyable {
 
     @Override
-    public Orientation processOn(Orientation oldOrientation) {
+    public Orientation applyOn(Orientation oldOrientation) {
         return oldOrientation.turnRight();
     }
 }

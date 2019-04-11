@@ -4,15 +4,14 @@ import lombok.Data;
 import my.kata.mower.domain.instruction.Instruction;
 import my.kata.mower.domain.lawn.Lawn;
 import my.kata.mower.domain.mower.Mower;
-import my.kata.mower.domain.instruction.InstructionProcessor;
 import my.kata.mower.infra.ScenarioParser;
 
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.List;
 
-import static my.kata.mower.domain.coordinates.X.x;
-import static my.kata.mower.domain.coordinates.Y.y;
+import static my.kata.mower.domain.geography.coordinates.X.x;
+import static my.kata.mower.domain.geography.coordinates.Y.y;
 
 
 @Data

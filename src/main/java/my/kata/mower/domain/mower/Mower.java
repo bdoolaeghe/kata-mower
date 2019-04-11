@@ -1,9 +1,9 @@
 package my.kata.mower.domain.mower;
 
-import my.kata.mower.domain.coordinates.Coordinates;
+import my.kata.mower.domain.geography.coordinates.Coordinates;
 import my.kata.mower.domain.instruction.Instruction;
 import my.kata.mower.domain.lawn.Lawn;
-import my.kata.mower.domain.orientation.Orientation;
+import my.kata.mower.domain.geography.orientation.Orientation;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NonNull;
@@ -20,8 +20,8 @@ public class Mower {
     private Orientation orientation;
 
     public void apply(Instruction instruction, Lawn lawn) {
-        orientation = instruction.getProcessor().processOn(orientation);
-        position = instruction.getProcessor().processOn(position, orientation, lawn);
+        orientation = instruction.applyOn(orientation);
+        position = instruction.applyOn(position, orientation, lawn);
     }
 
     public void applyAll(List<Instruction> instructions, Lawn lawn) {

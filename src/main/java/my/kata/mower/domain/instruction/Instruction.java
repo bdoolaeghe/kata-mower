@@ -1,28 +1,39 @@
 package my.kata.mower.domain.instruction;
 
-import lombok.Getter;
+import my.kata.mower.domain.geography.coordinates.Coordinates;
+import my.kata.mower.domain.lawn.Lawn;
+import my.kata.mower.domain.geography.orientation.Orientation;
 
-public enum Instruction {
+public enum Instruction implements Applyable {
 
     LEFT("L", new LeftInstructionProcessor()),
     RIGHT("R", new RightInstructionProcessor()),
     FORWARD("F", new ForwardInstructionProcessor());
 
-    @Getter
-    InstructionProcessor processor;
-    String id;
+    final Applyable processor;
+    final String code;
 
-    Instruction(String id, InstructionProcessor processor) {
-        this.id = id;
+    Instruction(String code, Applyable processor) {
+        this.code = code;
         this.processor = processor;
     }
 
-    public static Instruction fromId(String id) {
+    public static Instruction fromLetter(String aLetterCode) {
         for(Instruction value : values()) {
-            if (value.id.equals(id.toUpperCase().trim()))
+            if (value.code.equals(aLetterCode.toUpperCase().trim()))
                 return value;
         }
-        throw new IllegalArgumentException("Unsupported instruction \"" + id + "\"");
+        throw new IllegalArgumentException("Unsupported instruction \"" + aLetterCode + "\"");
     }
 
+
+    @Override
+    public Coordinates applyOn(Coordinates oldPosition, Orientation orientation, Lawn lawn) {
+        return processor.applyOn(oldPosition, orientation, lawn);
+    }
+
+    @Override
+    public Orientation applyOn(Orientation oldOrientation) {
+        return processor.applyOn(oldOrientation);
+    }
 }

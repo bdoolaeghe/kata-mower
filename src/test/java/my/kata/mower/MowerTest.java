@@ -1,8 +1,9 @@
 package my.kata.mower;
 
+import my.kata.mower.domain.instruction.Instruction;
 import my.kata.mower.domain.lawn.Lawn;
 import my.kata.mower.domain.mower.Mower;
-import my.kata.mower.domain.instruction.Instruction;
+import my.kata.mower.domain.instruction.InstructionProcessor;
 import org.junit.Test;
 
 import static my.kata.mower.domain.coordinates.Coordinates.coordinates;

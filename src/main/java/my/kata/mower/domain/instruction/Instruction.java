@@ -1,33 +1,28 @@
 package my.kata.mower.domain.instruction;
 
-import my.kata.mower.domain.lawn.Lawn;
-import my.kata.mower.domain.coordinates.Coordinates;
-import my.kata.mower.domain.orientation.Orientation;
+import lombok.Getter;
 
-public interface Instruction {
-    Instruction LEFT = new LeftInstruction();
-    Instruction RIGHT = new RightInstruction();
-    Instruction FORWARD = new ForwardInstruction();
+public enum Instruction {
 
-    default Coordinates applyOn(Coordinates oldPosition, Orientation orientation, Lawn lawn) {
-        return oldPosition;
+    LEFT("L", new LeftInstructionProcessor()),
+    RIGHT("R", new RightInstructionProcessor()),
+    FORWARD("F", new ForwardInstructionProcessor());
+
+    @Getter
+    InstructionProcessor processor;
+    String id;
+
+    Instruction(String id, InstructionProcessor processor) {
+        this.id = id;
+        this.processor = processor;
     }
-    default Orientation applyOn(Orientation oldOrientation) {
-        return oldOrientation;
+
+    public static Instruction fromId(String id) {
+        for(Instruction value : values()) {
+            if (value.id.equals(id.toUpperCase().trim()))
+                return value;
+        }
+        throw new IllegalArgumentException("Unsupported instruction \"" + id + "\"");
     }
 
-    static Instruction parse(String instruction) {
-        //FIXME maybe we could do something nicer
-        if ("L".equals(instruction.toUpperCase().trim())) {
-            return LEFT;
-        }
-        if ("R".equals(instruction.toUpperCase().trim())) {
-            return RIGHT;
-        }
-        if ("F".equals(instruction.toUpperCase().trim())) {
-            return FORWARD;
-        }
-
-        throw new IllegalArgumentException("unsupported instruction: " + instruction);
-    }
 }

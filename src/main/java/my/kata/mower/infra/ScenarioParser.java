@@ -1,9 +1,10 @@
 package my.kata.mower.infra;
 
+import my.kata.mower.domain.instruction.Instruction;
 import my.kata.mower.domain.lawn.Lawn;
 import my.kata.mower.domain.mower.Mower;
 import my.kata.mower.domain.coordinates.Coordinates;
-import my.kata.mower.domain.instruction.Instruction;
+import my.kata.mower.domain.instruction.InstructionProcessor;
 import my.kata.mower.domain.orientation.Orientation;
 
 import java.io.IOException;
@@ -16,6 +17,7 @@ import static java.util.stream.Collectors.toList;
 import static my.kata.mower.domain.coordinates.Coordinates.coordinates;
 import static my.kata.mower.domain.coordinates.X.x;
 import static my.kata.mower.domain.coordinates.Y.y;
+import static my.kata.mower.domain.orientation.Orientation.orientation;
 
 public class ScenarioParser {
 
@@ -35,13 +37,14 @@ public class ScenarioParser {
         // create mower
         String[] initialPositionStr = initialPositionLine.split(" ");
         Coordinates mowerInitialPosition = coordinates(x(initialPositionStr[0]), y(initialPositionStr[1]));
-        Orientation mowerInitialOrientation = Orientation.parse(initialPositionStr[2]);
+        Orientation mowerInitialOrientation = orientation(initialPositionStr[2]);
         return new Mower(mowerInitialPosition, mowerInitialOrientation);
     }
 
     public static List<Instruction> parseInstructions(String instructionSequence) {
         return Stream.of(instructionSequence.replaceAll(" ", "").split(""))
-                .map(Instruction::parse).collect(toList());
+                .map(Instruction::fromId)
+                .collect(toList());
     }
 
 }

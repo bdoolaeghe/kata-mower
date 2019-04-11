@@ -20,11 +20,11 @@ public class Mower {
     private Orientation orientation;
 
     public void apply(Instruction instruction, Lawn lawn) {
-        orientation = instruction.applyOn(orientation);
-        position = instruction.applyOn(position, orientation, lawn);
+        orientation = instruction.getProcessor().processOn(orientation);
+        position = instruction.getProcessor().processOn(position, orientation, lawn);
     }
 
-    public void applyAll(List<Instruction> instructions , Lawn lawn) {
+    public void applyAll(List<Instruction> instructions, Lawn lawn) {
         instructions.forEach(instruction -> apply(instruction, lawn));
     }
 

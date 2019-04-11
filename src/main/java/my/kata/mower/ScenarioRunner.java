@@ -1,9 +1,10 @@
 package my.kata.mower;
 
 import lombok.Data;
+import my.kata.mower.domain.instruction.Instruction;
 import my.kata.mower.domain.lawn.Lawn;
 import my.kata.mower.domain.mower.Mower;
-import my.kata.mower.domain.instruction.Instruction;
+import my.kata.mower.domain.instruction.InstructionProcessor;
 import my.kata.mower.infra.ScenarioParser;
 
 import java.io.IOException;

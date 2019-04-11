@@ -10,7 +10,7 @@ public interface Orientation {
     Orientation turnLeft();
     Orientation turnRight();
 
-    static Orientation parse(String orientation) {
+    static Orientation orientation(String orientation) {
         //FIXME maybe we could do something nicer
         if ("N".equals(orientation.toUpperCase().trim())) {
             return NORTH;

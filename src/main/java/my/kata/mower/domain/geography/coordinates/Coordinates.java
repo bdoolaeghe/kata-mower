@@ -10,7 +10,6 @@ import static my.kata.mower.domain.geography.coordinates.X.x;
 import static my.kata.mower.domain.geography.coordinates.Y.y;
 
 @AllArgsConstructor
-@Getter
 @EqualsAndHashCode
 public class Coordinates {
 
@@ -21,24 +20,29 @@ public class Coordinates {
     private Y y;
 
     public Coordinates right() {
-        return coordinates(x(this.x.getValue() + 1), y);
+        return coordinates(x.shiftRight(), y);
     }
 
     public Coordinates left() {
-        return coordinates(x(this.x.getValue() - 1), y);
+        return coordinates(x.shiftLeft(), y);
     }
 
     public Coordinates up() {
-        return coordinates(x, y(this.y.getValue() + 1));
+        return coordinates(x, y.shiftUp());
     }
 
     public Coordinates down() {
-        return coordinates(x, y(this.y.getValue() - 1));
+        return coordinates(x, y.shifDown());
+    }
+
+    public boolean isGreaterThan(Coordinates otherCoordinates) {
+        return this.x.isGreaterThan(otherCoordinates.x) &&
+                this.y.isGreaterThan(otherCoordinates.y);
     }
 
     @Override
     public String toString() {
-        return "(" + x.getValue() + "," + y.getValue() + ")";
+        return "(" + x + "," + y + ")";
     }
 
     public static Coordinates coordinates(X x, Y y) {

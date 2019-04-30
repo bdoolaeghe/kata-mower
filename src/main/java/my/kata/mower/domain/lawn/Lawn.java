@@ -13,7 +13,6 @@ public class Lawn {
     }
 
     public boolean contains(Coordinates coord) {
-        return coord.getX().getValue() <= upperRightCorner.getX().getValue() &&
-                coord.getY().getValue() <= upperRightCorner.getY().getValue();
+        return upperRightCorner.isGreaterThan(coord);
     }
 }

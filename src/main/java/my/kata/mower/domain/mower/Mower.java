@@ -30,6 +30,6 @@ public class Mower {
 
     @Override
     public String toString() {
-        return position.getX().getValue() + " " + position.getY().getValue() + " " + orientation.toString();
+        return position + " " + orientation;
     }
 }

@@ -2,20 +2,45 @@ package my.kata.mower.domain.geography.orientation;
 
 import my.kata.mower.domain.instruction.*;
 
-public enum Orientation implements Turnable {
+public enum Orientation {
 
-    NORTH("N",  new FromNorthTurner()),
-    SOUTH("S", new FromSouthTurner()),
-    EAST("E", new FromEastTurner()),
-    WEST("W", new FromWestTurner());
+    NORTH("N"),
+    SOUTH("S"),
+    EAST("E"),
+    WEST("W");
 
     public final String code;
 
-    public final Turnable turnInstructionProcessor;
-
-    Orientation(String code, Turnable turnInstructionProcessor) {
+    Orientation(String code) {
         this.code = code;
-        this.turnInstructionProcessor = turnInstructionProcessor;
+    }
+
+    public Orientation turnLeft() {
+        switch (this) {
+            case NORTH:
+                return WEST;
+            case SOUTH:
+                return EAST;
+            case EAST:
+                return NORTH;
+            case WEST:
+                return SOUTH;
+        }
+        throw new UnsupportedOperationException();
+    }
+
+    public Orientation turnRight() {
+        switch (this) {
+            case NORTH:
+                return EAST;
+            case SOUTH:
+                return WEST;
+            case EAST:
+                return SOUTH;
+            case WEST:
+                return NORTH;
+        }
+        throw new UnsupportedOperationException();
     }
 
     public static Orientation fromLetter(String aLetterCode) {
@@ -24,16 +49,6 @@ public enum Orientation implements Turnable {
                 return value;
         }
         throw new IllegalArgumentException("Unsupported orientation \"" + aLetterCode + "\"");
-    }
-
-    @Override
-    public Orientation turnLeft() {
-        return turnInstructionProcessor.turnLeft();
-    }
-
-    @Override
-    public Orientation turnRight() {
-        return turnInstructionProcessor.turnRight();
     }
 
     @Override

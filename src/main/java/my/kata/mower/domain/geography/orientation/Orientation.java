@@ -1,7 +1,5 @@
 package my.kata.mower.domain.geography.orientation;
 
-import my.kata.mower.domain.instruction.*;
-
 public enum Orientation {
 
     NORTH("N"),

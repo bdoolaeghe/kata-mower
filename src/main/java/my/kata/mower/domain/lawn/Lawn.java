@@ -13,6 +13,6 @@ public class Lawn {
     }
 
     public boolean contains(Coordinates coord) {
-        return upperRightCorner.isGreaterThan(coord);
+        return upperRightCorner.isGreaterThan(coord) && coord.isPositive();
     }
 }

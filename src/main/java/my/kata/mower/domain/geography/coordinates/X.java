@@ -36,4 +36,8 @@ public class X {
     public static X x(String value) {
         return new X(Integer.parseInt(value));
     }
+
+    public boolean isPositive() {
+        return abscissa >= 0;
+    }
 }

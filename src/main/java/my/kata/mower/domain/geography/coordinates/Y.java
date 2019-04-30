@@ -37,4 +37,8 @@ public class Y {
     public static Y y(String value) {
         return new Y(Integer.parseInt(value));
     }
+
+    public boolean isPositive() {
+        return ordinate >= 0;
+    }
 }

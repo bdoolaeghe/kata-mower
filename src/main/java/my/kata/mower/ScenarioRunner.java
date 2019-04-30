@@ -35,7 +35,7 @@ public class ScenarioRunner {
                 String instructionSequence = scenarioLines[i + 1];
                 List<Instruction> instructions = ScenarioParser.parseInstructions(instructionSequence);
 
-                mower.applyAll(instructions, lawn);
+                mower.execute(instructions, lawn);
                 out.println(mower.toString());
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new RuntimeException("Malformed input file", e);

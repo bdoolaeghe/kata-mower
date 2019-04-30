@@ -19,13 +19,13 @@ public class Mower {
     @NonNull
     private Orientation orientation;
 
-    public void apply(Instruction instruction, Lawn lawn) {
+    public void execute(Instruction instruction, Lawn lawn) {
         orientation = instruction.applyOn(orientation);
         position = instruction.applyOn(position, orientation, lawn);
     }
 
-    public void applyAll(List<Instruction> instructions, Lawn lawn) {
-        instructions.forEach(instruction -> apply(instruction, lawn));
+    public void execute(List<Instruction> instructions, Lawn lawn) {
+        instructions.forEach(instruction -> execute(instruction, lawn));
     }
 
     @Override

@@ -41,7 +41,7 @@ public class ScenarioParser {
 
     public static List<Instruction> parseInstructions(String instructionSequence) {
         return Stream.of(instructionSequence.replaceAll(" ", "").split(""))
-                .map(Instruction::fromLetter)
+                .map(Instruction::fromCode)
                 .collect(toList());
     }
 

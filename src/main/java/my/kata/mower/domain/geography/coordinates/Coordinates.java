@@ -48,4 +48,8 @@ public class Coordinates {
     public static Coordinates coordinates(X x, Y y) {
         return new Coordinates(x, y);
     }
+
+    public boolean isPositive() {
+        return x.isPositive() && y.isPositive();
+    }
 }

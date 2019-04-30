@@ -18,7 +18,7 @@ public class ScenarioTest {
         String[] outputLines = outputStream.toString().split("\\n");
 
         assertThat(outputLines.length, is(2));
-        assertThat(outputLines[0], is("1 3 N"));
-        assertThat(outputLines[1], is("5 1 E"));
+        assertThat(outputLines[0], is("(1,3) N"));
+        assertThat(outputLines[1], is("(5,1) E"));
     }
 }

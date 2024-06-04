@@ -8,7 +8,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NonNull;
 
+import java.text.MessageFormat;
 import java.util.List;
+
+import static java.text.MessageFormat.format;
 
 @Getter
 @AllArgsConstructor
@@ -30,6 +33,6 @@ public class Mower {
 
     @Override
     public String toString() {
-        return position + " " + orientation;
+        return format("{0} {1}", position, orientation);
     }
 }

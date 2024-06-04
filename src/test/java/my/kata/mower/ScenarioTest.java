@@ -12,7 +12,8 @@ public class ScenarioTest {
 
     @Test
     public void should_complete_basic_2_mowers_scenario() throws IOException {
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        var outputStream = new ByteArrayOutputStream();
+
         ScenarioRunner.run("scenario.txt", new PrintStream(outputStream));
         String[] outputLines = outputStream.toString().split("\\n");
 

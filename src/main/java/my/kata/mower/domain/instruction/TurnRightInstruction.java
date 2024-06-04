@@ -1,9 +1,11 @@
 package my.kata.mower.domain.instruction;
 
+import lombok.EqualsAndHashCode;
 import my.kata.mower.domain.geography.coordinates.Coordinates;
 import my.kata.mower.domain.geography.orientation.Orientation;
 import my.kata.mower.domain.lawn.Lawn;
 
+@EqualsAndHashCode
 public class TurnRightInstruction implements Instruction {
 
     @Override

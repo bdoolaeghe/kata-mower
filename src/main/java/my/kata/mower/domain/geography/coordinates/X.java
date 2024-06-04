@@ -1,16 +1,9 @@
 package my.kata.mower.domain.geography.coordinates;
 
 
-import lombok.EqualsAndHashCode;
+import static java.lang.Integer.parseInt;
 
-@EqualsAndHashCode
-public class X {
-
-    private int abscissa;
-
-    public X(int abscissa) {
-        this.abscissa = abscissa;
-    }
+public record X(int abscissa) {
 
     public X shiftRight() {
         return x(this.abscissa + 1);
@@ -24,9 +17,13 @@ public class X {
         return this.abscissa >= otherX.abscissa;
     }
 
+    public boolean isPositive() {
+        return abscissa >= 0;
+    }
+
     @Override
     public String toString() {
-        return "" + this.abscissa;
+        return String.valueOf(this.abscissa);
     }
 
     public static X x(int value) {
@@ -34,10 +31,7 @@ public class X {
     }
 
     public static X x(String value) {
-        return new X(Integer.parseInt(value));
+        return new X(parseInt(value));
     }
 
-    public boolean isPositive() {
-        return abscissa >= 0;
-    }
 }

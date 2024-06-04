@@ -1,55 +1,41 @@
 package my.kata.mower.domain.geography.coordinates;
 
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NonNull;
+import static java.text.MessageFormat.format;
 
-import static my.kata.mower.domain.geography.coordinates.X.x;
-import static my.kata.mower.domain.geography.coordinates.Y.y;
+public record Coordinates(X x, Y y) {;
 
-@AllArgsConstructor
-@EqualsAndHashCode
-public class Coordinates {
-
-    @NonNull
-    private X x;
-
-    @NonNull
-    private Y y;
-
-    public Coordinates right() {
+    public Coordinates atRight() {
         return coordinates(x.shiftRight(), y);
     }
 
-    public Coordinates left() {
+    public Coordinates atLeft() {
         return coordinates(x.shiftLeft(), y);
     }
 
-    public Coordinates up() {
+    public Coordinates onTop() {
         return coordinates(x, y.shiftUp());
     }
 
-    public Coordinates down() {
-        return coordinates(x, y.shifDown());
+    public Coordinates onBottom() {
+        return coordinates(x, y.shiftDown());
     }
 
     public boolean isGreaterThan(Coordinates otherCoordinates) {
         return this.x.isGreaterThan(otherCoordinates.x) &&
-                this.y.isGreaterThan(otherCoordinates.y);
-    }
-
-    @Override
-    public String toString() {
-        return "(" + x + "," + y + ")";
-    }
-
-    public static Coordinates coordinates(X x, Y y) {
-        return new Coordinates(x, y);
+               this.y.isGreaterThan(otherCoordinates.y);
     }
 
     public boolean isPositive() {
         return x.isPositive() && y.isPositive();
+    }
+
+    @Override
+    public String toString() {
+        return format("({0},{1})", x, y);
+    }
+
+    public static Coordinates coordinates(X x, Y y) {
+        return new Coordinates(x, y);
     }
 }

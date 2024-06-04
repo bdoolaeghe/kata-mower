@@ -1,5 +1,7 @@
 package my.kata.mower.domain.geography.orientation;
 
+import static java.text.MessageFormat.format;
+
 public enum Orientation {
 
     NORTH("N"),
@@ -14,39 +16,29 @@ public enum Orientation {
     }
 
     public Orientation turnLeft() {
-        switch (this) {
-            case NORTH:
-                return WEST;
-            case SOUTH:
-                return EAST;
-            case EAST:
-                return NORTH;
-            case WEST:
-                return SOUTH;
-        }
-        throw new UnsupportedOperationException();
+        return switch (this) {
+            case NORTH -> WEST;
+            case SOUTH -> EAST;
+            case EAST -> NORTH;
+            case WEST -> SOUTH;
+        };
     }
 
     public Orientation turnRight() {
-        switch (this) {
-            case NORTH:
-                return EAST;
-            case SOUTH:
-                return WEST;
-            case EAST:
-                return SOUTH;
-            case WEST:
-                return NORTH;
-        }
-        throw new UnsupportedOperationException();
+        return switch (this) {
+            case NORTH -> EAST;
+            case SOUTH -> WEST;
+            case EAST -> SOUTH;
+            case WEST -> NORTH;
+        };
     }
 
     public static Orientation fromLetter(String aLetterCode) {
-        for(Orientation value : values()) {
+        for(var value : values()) {
             if (value.code.equals(aLetterCode.toUpperCase().trim()))
                 return value;
         }
-        throw new IllegalArgumentException("Unsupported orientation \"" + aLetterCode + "\"");
+        throw new IllegalArgumentException(format("Unsupported orientation \"{0}\"", aLetterCode));
     }
 
     @Override

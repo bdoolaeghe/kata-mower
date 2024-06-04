@@ -1,23 +1,15 @@
 package my.kata.mower.domain.geography.coordinates;
 
 
-import lombok.EqualsAndHashCode;
+import static java.lang.Integer.parseInt;
 
-@EqualsAndHashCode
-public class Y {
-
-    private int ordinate;
-
-    public Y(int ordinate) {
-        this.ordinate = ordinate;
-    }
-
+public record Y(int ordinate) {
 
     public Y shiftUp() {
         return y(this.ordinate + 1);
     }
 
-    public Y shifDown() {
+    public Y shiftDown() {
         return y(this.ordinate - 1);
     }
 
@@ -25,9 +17,13 @@ public class Y {
         return this.ordinate >= otherY.ordinate;
     }
 
+    public boolean isPositive() {
+        return ordinate >= 0;
+    }
+
     @Override
     public String toString() {
-        return "" + this.ordinate;
+        return String.valueOf(this.ordinate);
     }
 
     public static Y y(int value) {
@@ -35,10 +31,7 @@ public class Y {
     }
 
     public static Y y(String value) {
-        return new Y(Integer.parseInt(value));
+        return new Y(parseInt(value));
     }
 
-    public boolean isPositive() {
-        return ordinate >= 0;
-    }
 }

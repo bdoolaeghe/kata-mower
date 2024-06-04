@@ -1,22 +1,20 @@
 package my.kata.mower.domain.instruction;
 
 import my.kata.mower.domain.geography.coordinates.Coordinates;
-import my.kata.mower.domain.lawn.Lawn;
 import my.kata.mower.domain.geography.orientation.Orientation;
+import my.kata.mower.domain.lawn.Lawn;
+
+import static java.text.MessageFormat.format;
 
 public interface Instruction {
 
     static Instruction fromCode(String aLetterCode) {
-        switch (aLetterCode) {
-            case "L":
-                return new TurnLeftInstruction();
-            case "R":
-                return new TurnRightInstruction();
-            case "F":
-                return new MoveForwardInstruction();
-            default:
-                throw new IllegalArgumentException("Unsupported instruction \"" + aLetterCode + "\"");
-        }
+        return switch (aLetterCode) {
+            case "L" -> new TurnLeftInstruction();
+            case "R" -> new TurnRightInstruction();
+            case "F" -> new MoveForwardInstruction();
+            default -> throw new IllegalArgumentException(format("Unsupported instruction \"{0}\"", aLetterCode));
+        };
     }
 
     Orientation applyOn(Orientation currentOrientation);

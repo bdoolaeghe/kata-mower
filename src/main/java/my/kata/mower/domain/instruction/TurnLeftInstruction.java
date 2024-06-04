@@ -4,7 +4,7 @@ import my.kata.mower.domain.geography.coordinates.Coordinates;
 import my.kata.mower.domain.geography.orientation.Orientation;
 import my.kata.mower.domain.lawn.Lawn;
 
-public class TurnLeftInstruction implements Instruction{
+public class TurnLeftInstruction implements Instruction {
 
     @Override
     public Orientation applyOn(Orientation currentOrientation) {

@@ -7,12 +7,9 @@ import my.kata.mower.domain.lawn.Lawn;
 public class MoveForwardInstruction implements Instruction {
 
     private Coordinates checkedNewPosition(Coordinates newPosition, Coordinates currentPosition, Lawn lawn) {
-        if (lawn.contains(newPosition)) {
-            return newPosition;
-        } else {
-            // oops, instruction make me go out of the lawn
-            return currentPosition;
-        }
+        return lawn.contains(newPosition)
+                ? newPosition
+                : currentPosition; // oops, instruction make me go out of the lawn
     }
 
     @Override
@@ -22,22 +19,16 @@ public class MoveForwardInstruction implements Instruction {
 
     @Override
     public Coordinates applyOn(Coordinates currentPosition, Orientation currentOrientation, Lawn lawn) {
-        Coordinates newPosition = null;
-        switch (currentOrientation) {
-            case NORTH:
-                newPosition = currentPosition.up();
-                break;
-            case SOUTH:
-                newPosition = currentPosition.down();
-                break;
-            case EAST:
-                newPosition = currentPosition.right();
-                break;
-            case WEST:
-                newPosition = currentPosition.left();
-                break;
-        }
-
+        var newPosition = computeNewPosition(currentPosition, currentOrientation);
         return checkedNewPosition(newPosition, currentPosition, lawn);
+    }
+
+    private static Coordinates computeNewPosition(Coordinates currentPosition, Orientation currentOrientation) {
+        return switch (currentOrientation) {
+            case NORTH -> currentPosition.onTop();
+            case SOUTH -> currentPosition.onBottom();
+            case EAST -> currentPosition.atRight();
+            case WEST -> currentPosition.atLeft();
+        };
     }
 }

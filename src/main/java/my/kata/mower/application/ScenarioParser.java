@@ -1,4 +1,4 @@
-package my.kata.mower.infra;
+package my.kata.mower.application;
 
 import my.kata.mower.domain.instruction.Instruction;
 import my.kata.mower.domain.lawn.Lawn;

@@ -1,5 +1,6 @@
 package my.kata.mower;
 
+import my.kata.mower.application.ScenarioRunner;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;

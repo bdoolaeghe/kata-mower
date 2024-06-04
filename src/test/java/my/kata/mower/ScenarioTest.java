@@ -1,13 +1,12 @@
 package my.kata.mower;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ScenarioTest {
 
@@ -17,8 +16,8 @@ public class ScenarioTest {
         ScenarioRunner.run("scenario.txt", new PrintStream(outputStream));
         String[] outputLines = outputStream.toString().split("\\n");
 
-        assertThat(outputLines.length, is(2));
-        assertThat(outputLines[0], is("(1,3) N"));
-        assertThat(outputLines[1], is("(5,1) E"));
+        assertThat(outputLines.length).isEqualTo(2);
+        assertThat(outputLines[0]).isEqualTo("(1,3) N");
+        assertThat(outputLines[1]).isEqualTo("(5,1) E");
     }
 }

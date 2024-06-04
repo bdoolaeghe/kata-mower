@@ -1,11 +1,11 @@
 package my.kata.mower.domain.geography.coordinates;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static my.kata.mower.domain.geography.coordinates.Coordinates.coordinates;
 import static my.kata.mower.domain.geography.coordinates.X.x;
 import static my.kata.mower.domain.geography.coordinates.Y.y;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CoordinatesTest {
 
